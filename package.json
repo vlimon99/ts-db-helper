@@ -16,14 +16,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/margarito/ts-db-helper.git"
+        "url": "https://github.com/margarito/ts-db-helper.git"
     },
     "keywords": [
-        "API",
-        "REST",
+        "ORM",
         "TypeScript",
-        "nodejs",
-        "express"
+        "rdb",
+        "db",
+        "database",
+        "model"
     ],
     "author": "Olivier Margarit",
     "license": "MIT",
