@@ -2,9 +2,7 @@ import { QueryConnector } from './interfaces/query-connector.interface';
 import { ModelMigration } from './interfaces/model-migration.interface';
 
 /**
- * @class NgDbHelperModuleConfig is a config model for the module.
- * Future release version may have default values to make easier the module
- * integration.
+ * @class DbHelperModuleConfig is a config model for the module.
  *
  * @author  Olivier Margarit
  * @since   0.1
