@@ -1,22 +1,22 @@
 {
-    "name": "ts-rest-framework",
+    "name": "ts-db-helper",
     "version": "0.0.1",
-    "description": "Simple REST framework based on TypeScript and express",
-    "main": "dist/bundles/ts-rest-framework.umd.js",
+    "description": "Simple ORM based on TypeScript",
+    "main": "dist/bundles/ts-db-helper.umd.js",
     "module": "dist/index.js",
     "typings": "src/index.ts",
     "scripts": {
         "tslint": "tslint --project .",
-        "doc": "typedoc --out ./documentation/ ./lib/ --mode file --module umd --target ES5",
+        "doc": "typedoc --out ./documentation/ ./src/ --mode file --module umd --target ES5",
         "cleanup": "rimraf dist/bundles dist/src dist/index.d.ts dist/index.metadata.json dist/index.js dist/index.js.map dist/LICENSE dist/README.md",
         "bundling": "rollup -c",
-        "minify": "uglifyjs dist/bundles/ts-rest-framework.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ts-rest-framework.umd.min.js",
+        "minify": "uglifyjs dist/bundles/ts-db-helper.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ts-db-helper.umd.min.js",
         "copy": "copyfiles LICENSE README.md dist",
         "build": "npm run cleanup && tsc && npm run bundling && npm run minify && npm run copy && node generate-dist-package.json.js"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/margarito/ts-rest-framework.git"
+        "url": "git+https://github.com/margarito/ts-db-helper.git"
     },
     "keywords": [
         "API",
@@ -28,21 +28,10 @@
     "author": "Olivier Margarit",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/margarito/ts-rest-framework/issues"
+        "url": "https://github.com/margarito/ts-db-helper/issues"
     },
-    "homepage": "https://github.com/margarito/ts-rest-framework#readme",
+    "homepage": "https://github.com/margarito/ts-db-helper#readme",
     "dependencies": {
-        "@types/body-parser": "^1.16.5",
-        "@types/debug": "0.0.30",
-        "@types/express": "^4.0.37",
-        "@types/jsonwebtoken": "^7.2.3",
-        "@types/morgan": "^1.7.32",
-        "body-parser": "^1.18.1",
-        "debug": "^3.0.1",
-        "express": "^4.15.4",
-        "http": "0.0.0",
-        "jsonwebtoken": "^8.0.1",
-        "morgan": "^1.8.2",
         "rxjs": "^5.1.0"
     },
     "devDependencies": {

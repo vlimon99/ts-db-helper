@@ -38,6 +38,6 @@ export class RestoreDataError implements Error {
      * @return {string} string represation of the error
      */
     public toString(): string {
-        return name + '\n' + this.message;
+        return this.name + '\n' + this.message;
     }
 }

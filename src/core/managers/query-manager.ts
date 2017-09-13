@@ -1,7 +1,6 @@
+import { DbHelperModuleConfig } from '../db-helper-module-config';
 import { toArray } from 'rxjs/operator/toArray';
 import { Subject } from 'rxjs/Subject';
-import { NgDbHelperModuleConfig } from '../../ng-db-helper-module-config';
-import { Query } from '@angular/core';
 import { ModelMigration } from '../interfaces/model-migration.interface';
 import { QueryError } from '../errors/query.error';
 import { ModelManager } from './model-manager';
@@ -101,7 +100,7 @@ export class QueryManager {
      *
      * @return {QueryManager} the initialized instance
      */
-    public static init(config: NgDbHelperModuleConfig): QueryManager {
+    public static init(config: DbHelperModuleConfig): QueryManager {
         const instance = QueryManager.getInstance();
         instance.queryConnector = config.queryConnector;
         instance.modelMigration = config.modelMigration;
@@ -325,7 +324,7 @@ export class QueryManager {
             if (this.queryConnector) {
                 this.queryConnector.query(dbQuery).subscribe(observer);
             } else {
-                throw(new UnsatisfiedRequirementError('QueryConnector object is missing, check and fix NgDbHelperModule configuration !'))
+                throw(new UnsatisfiedRequirementError('QueryConnector object is missing, check and fix NgDbHelperModule configuration !'));
             }
         }
     }

@@ -38,6 +38,7 @@ export class QueryError implements Error {
      * @return {string} string represation of the error
      */
     public toString(): string {
-        return name + '\n' + this.message + (this.query ? '\nquery: ' + this.query : '') + (this.params ? '\nparams: ' + this.params : '');
+        return this.name + '\n' + this.message + (this.query ? '\nquery: ' + this.query : '') +
+            (this.params ? '\nparams: ' + this.params : '');
     }
 }

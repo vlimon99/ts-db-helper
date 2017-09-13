@@ -8,7 +8,6 @@ import { NotImplementedError } from '../errors/not-implemented.error';
 import { DbRelationModel } from './structure/db-relation.model';
 import { QueryError } from '../errors/query.error';
 import { RelationType } from './constants/relation-type.constant';
-import { Query } from '@angular/core';
 import { DbTable } from './structure/db-table.model';
 import { QueryResult } from '../interfaces/query-result.interface';
 import { Select } from './queries/select.model';

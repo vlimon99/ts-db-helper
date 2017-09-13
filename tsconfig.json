@@ -10,14 +10,13 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "express": ["node_modules/express"],
             "rxjs/*": ["node_modules/rxjs/*"]
         },
         "rootDir": ".",
         "outDir": "dist",
         "sourceMap": true,
         "inlineSources": true,
-        "target": "es6",
+        "target": "es5",
         "skipLibCheck": true,
         "lib": [
             "es2015"

@@ -1,4 +1,3 @@
-import { Query } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
 import { DbQuery } from './db-query.model';
 import { QueryResult } from '../interfaces/query-result.interface';
