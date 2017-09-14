@@ -1,3 +1,4 @@
+export { QueryManager } from './managers/query-manager';
 export { ForeignModel } from './decorators/foreign-model';
 export { PrimaryKey } from './decorators/primary-key';
 export { DbRelationModel } from './models/structure/db-relation.model';
