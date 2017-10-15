@@ -110,7 +110,7 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      */
     public copy(): QuerySelect<T> {
         const q = Select(this.model).where(this.whereClauses).join(this.joins).groupBy(this.grpBy).orderBy(this.ordrBy);
-        if (this.proj) {q.projection(this.proj)}
+        if (this.proj) {q.projection(this.proj); }
         return q;
     }
 
@@ -224,6 +224,14 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
         return this;
     }
 
+    public getSize(): number {
+        return this.size;
+    }
+
+    public getPage(): number {
+        return this.page;
+    }
+
     /**
      * @public
      * @method getProjectedTable get virtual table representing the result table expected
@@ -274,7 +282,7 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
             for (const joinQuery of this.joins) {
                 const joinTable = joinQuery.getProjectedTable();
                 for (const column of joinTable.columnList) {
-                    const joinColumn = column.fromAlias(joinQuery.alias)
+                    const joinColumn = column.fromAlias(joinQuery.alias);
                     table.columnList.push(joinColumn);
                     table.columns[joinColumn.name] = joinColumn;
                     table.fields[joinColumn.field] = joinColumn;

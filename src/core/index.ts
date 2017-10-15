@@ -1,3 +1,16 @@
+export { StringFieldSerializer } from './serializers/field-serializers/string.field-serializer';
+export { RealFieldSerializer } from './serializers/field-serializers/real.field-serializer';
+export { ForeignModelFieldSerializer } from './serializers/field-serializers/foreign-model.field-serializer';
+export { FieldSerializerError } from './serializers/field-serializers/field-serializer.error';
+export { FieldSerializerConfigurator } from './serializers/field-serializers/field-serializer.configurator';
+export { FieldSerializerRules } from './serializers/field-serializers/field-serializer-rules';
+export { ComputedFieldSerializer } from './serializers/field-serializers/computed.field-serializer';
+export { BooleanFieldSerializer } from './serializers/field-serializers/boolean.field-serializer';
+export { BlobFieldSerializer } from './serializers/field-serializers/blob.field-serializer';
+export { FieldSerializer } from './serializers/field-serializers/field-serializer';
+export { AutoSerializer } from './serializers/auto.serializer';
+export { SerializerError } from './errors/serializer.error';
+export { Serializer } from './serializers/serializer';
 export { QueryManager } from './managers/query-manager';
 export { ForeignModel } from './decorators/foreign-model';
 export { PrimaryKey } from './decorators/primary-key';

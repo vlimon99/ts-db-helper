@@ -1,4 +1,4 @@
-import { Column } from '../../..';
+import { Count } from './queries/count.model';
 import { ShadowValue } from './shadow-value.model';
 import { Subject } from 'rxjs/Subject';
 import { IClause } from './interfaces/i-clause.interface';
@@ -22,6 +22,10 @@ import { Delete } from './queries/delete.model';
 import { Update } from './queries/update.model';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/Observable/from';
 
 /**
  * @public
@@ -112,6 +116,25 @@ export abstract class DbHelperModel {
         }
     }
 
+    public update(): Observable<any> {
+        return Update(this).exec().map(() => {
+            this.$$isModified = false;
+            return null;
+        });
+    }
+
+    public insert(): Observable<any> {
+        return Insert(this).exec().switchMap((res: QueryResult<any>) => {
+            this.$$inserted = true;
+            if (!this.$$rowid && !this.hasValidPrimaryKey()) {
+                return this.restoreFromStorage();
+            } else {
+                this.$$isModified = false;
+                return Observable.from([null]);
+            }
+        });
+    }
+
     /**
      * @public
      * @method save the model method to save it in database
@@ -124,22 +147,14 @@ export abstract class DbHelperModel {
                 'add rowid or primary kies to the projection or customize Update to do what you expect.');
         }
         if (this.$$inserted) {
-            return Update(this).exec().map(() => {
-                this.$$isModified = false;
-                return null;
-            });
+            return this.update();
         } else {
-            return Observable.create((observer: Observer<any>) => {
-                Insert(this).exec().subscribe((res) => {
-                    this.$$inserted = true;
-                    if (!this.$$rowid && !this.hasValidPrimaryKey()) {
-                        this.restoreFromStorage().subscribe(observer);
-                    } else {
-                        this.$$isModified = false;
-                        observer.next(null);
-                        observer.complete();
-                    }
-                }, (err) => observer.error(err));
+            return this.checkIfShouldUpdateFromDatabase().switchMap((shouldUpdate: boolean) => {
+                if (shouldUpdate) {
+                    return this.update();
+                } else {
+                    return this.insert();
+                }
             });
         }
     }
@@ -345,6 +360,14 @@ export abstract class DbHelperModel {
         (this as {[index: string]: any})[fieldName] = value;
     }
 
+    public getCommonFieldType(fieldName: string): string {
+        let type = ModelManager.getInstance().getModel(this).fields[fieldName].type;
+        if (type.toLocaleLowerCase().indexOf('varchar') >= 0) {
+            type = 'varchar';
+        }
+        return type;
+    }
+
     /**
      * @public
      * @method delete delete the object from database
@@ -501,6 +524,21 @@ export abstract class DbHelperModel {
     private getManyToManyClause<T extends DbHelperModel>(model: {new(): T}): CompositeClause {
         throw new NotImplementedError('Many to many linked not implemented yet');
         // return Select(model).exec();
+    }
+
+    public checkIfShouldUpdateFromDatabase<T extends DbHelperModel>(): Observable<boolean> {
+        if (this.hasValidRowid()) {
+            this.$$inserted = true;
+            return Observable.from([true]);
+        } else if (this.hasValidPrimaryKey()) {
+            return Count(Select(this.constructor as {new(): T}).where(this.getPrimaryClause())).exec().map((count: number): boolean => {
+                this.$$inserted = count === 1;
+                return this.$$inserted;
+            });
+        } else {
+            this.$$inserted = false;
+            return Observable.from([false]);
+        }
     }
 
     /**

@@ -8,6 +8,7 @@
         "noImplicitAny": true,
         "module": "es2015",
         "moduleResolution": "node",
+        "importHelpers": true,
         "allowSyntheticDefaultImports": true,
         "paths": {
             "rxjs/*": ["node_modules/rxjs/*"]

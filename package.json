@@ -10,9 +10,10 @@
         "doc": "typedoc --out ./documentation/ ./src/ --mode file --module umd --target ES5",
         "cleanup": "rimraf dist/bundles dist/src dist/index.d.ts dist/index.metadata.json dist/index.js dist/index.js.map dist/LICENSE dist/README.md",
         "bundling": "rollup -c",
+        "afterBuildCleanup": "rimraf .rpt2_cache",
         "minify": "uglifyjs dist/bundles/ts-db-helper.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ts-db-helper.umd.min.js",
         "copy": "copyfiles LICENSE README.md dist",
-        "build": "npm run cleanup && tsc && npm run bundling && npm run minify && npm run copy && node generate-dist-package.json.js"
+        "build": "npm run cleanup && tsc && npm run bundling && npm run minify && npm run copy && node generate-dist-package.json.js && npm run afterBuildCleanup"
     },
     "repository": {
         "type": "git",
@@ -38,10 +39,11 @@
     "devDependencies": {
         "copyfiles": "^1.2.0",
         "rimraf": "^2.6.1",
-        "rollup": "~0.41.6",
+        "rollup": "~0.50.0",
+        "rollup-plugin-typescript2": "^0.7.0",
         "tslint": "^5.6.0",
         "typedoc": "^0.8.0",
-        "typescript": "^2.2.2",
+        "typescript": "^2.5.3",
         "uglify-js": "^2.8.20"
     }
 }
