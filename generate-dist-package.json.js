@@ -5,7 +5,7 @@ const distPackage = {};
 
 const fieldsToCopy = ['name', 'version', 'license', 'description', 'author', 'keywords', 'repository', 'homepage', 'bugs'];
 
-distPackage.main = 'bundles/ng-db-helper.umd.js';
+distPackage.main = 'bundles/ts-db-helper.umd.js';
 distPackage.module = 'index.js';
 distPackage.typings = 'index.d.ts';
 
@@ -14,7 +14,6 @@ for (const field of fieldsToCopy) {
 }
 
 distPackage.peerDependencies = {
-    'express': '^4.15.4',
     'rxjs': '^5.1.0'
 };
 

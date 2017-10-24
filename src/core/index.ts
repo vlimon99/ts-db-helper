@@ -12,6 +12,7 @@ export { AutoSerializer } from './serializers/auto.serializer';
 export { SerializerError } from './errors/serializer.error';
 export { Serializer } from './serializers/serializer';
 export { QueryManager } from './managers/query-manager';
+export { ModelManager } from './managers/model-manager';
 export { ForeignModel } from './decorators/foreign-model';
 export { PrimaryKey } from './decorators/primary-key';
 export { DbRelationModel } from './models/structure/db-relation.model';
