@@ -13,7 +13,7 @@ for (const field of fieldsToCopy) {
     distPackage[field] = package[field];
 }
 
-distPackage.peerDependencies = {
+distPackage.dependencies = {
     'rxjs': '^5.1.0'
 };
 
