@@ -1,3 +1,4 @@
+export { DbHelperModuleConfig } from './db-helper-module-config';
 export { StringFieldSerializer } from './serializers/field-serializers/string.field-serializer';
 export { RealFieldSerializer } from './serializers/field-serializers/real.field-serializer';
 export { ForeignModelFieldSerializer } from './serializers/field-serializers/foreign-model.field-serializer';
