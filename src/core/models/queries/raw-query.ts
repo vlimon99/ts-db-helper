@@ -45,6 +45,6 @@ export function RawQuery(query: string, params: any[], size?: number, page?: num
         exec: (): Observable<QueryResult<any>> => {
             return QueryManager.getInstance().query(dbQuery);
         }
-    }
+    };
     return q;
 }

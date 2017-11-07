@@ -2,7 +2,7 @@ import { ShadowValue } from '../models/shadow-value.model';
 import { ModelManager } from '../managers/model-manager';
 import { Clause } from '../models/queries/clause.model';
 import { QueryResult } from '../interfaces/query-result.interface';
-import { Select } from '../models/queries/select.model';
+import { Select } from '../models/queries/select';
 import { Observable } from 'rxjs/Observable';
 import { RelationType } from '../models/constants/relation-type.constant';
 import { DbRelationModel } from '../models/structure/db-relation.model';

@@ -1,4 +1,4 @@
-import { Count } from './queries/count.model';
+import { Count } from './queries/count';
 import { ShadowValue } from './shadow-value.model';
 import { Subject } from 'rxjs/Subject';
 import { IClause } from './interfaces/i-clause.interface';
@@ -10,16 +10,16 @@ import { QueryError } from '../errors/query.error';
 import { RelationType } from './constants/relation-type.constant';
 import { DbTable } from './structure/db-table.model';
 import { QueryResult } from '../interfaces/query-result.interface';
-import { Select } from './queries/select.model';
+import { Select } from './queries/select';
 import { RestoreDataError } from '../errors/restore-data.error';
 import { Clause } from './queries/clause.model';
 import { CompositeClause } from './queries/composite-clause.model';
 import { ClauseGroup } from './queries/clause-group.model';
 import { BadColumnDeclarationError } from '../errors/bad-column-declaration.error';
 import { ModelManager } from '../managers/model-manager';
-import { Insert } from './queries/insert.model';
-import { Delete } from './queries/delete.model';
-import { Update } from './queries/update.model';
+import { Insert } from './queries/insert';
+import { Delete } from './queries/delete';
+import { Update } from './queries/update';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 

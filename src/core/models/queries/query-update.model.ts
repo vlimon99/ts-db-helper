@@ -95,7 +95,7 @@ export class QueryUpdate<T extends DbHelperModel> {
     public set(dict: {[index: string]: any}): QueryUpdate<T> {
         if ((this.model as {[index: string]: any}).$$isDbHelperModel) {
             throw(new QueryError('Try to set values on Update query' +
-                ' already containing a model. This is not supported', '', ''))
+                ' already containing a model. This is not supported', '', ''));
         }
         if (this.valueSet) {
             // merge values
@@ -220,33 +220,4 @@ export class QueryUpdate<T extends DbHelperModel> {
     public exec(): Observable<QueryResult<any>> {
         return QueryManager.getInstance().query(this.build());
     }
-}
-
-/**
- * @public
- * @function Update
- *
- * @description
- * This function is an helper to update models.
- * For a single model prefer use {@link DbHelperModel.save}
- *
- * @param T @extends DbHelperModel a model declared with table and column annotations
- *
- * @example
- * ```typescript
- * // update todo object
- * Update(todo).exec().subscribe((qr: QueryResult<any>) => {
- *      // do something with the result...
- * }, (err) => {
- *      // do something with the error...
- * });
- * ```
- *
- * @return {QueryUpdate} query update instance
- *
- * @author  Olivier Margarit
- * @since   0.1
- */
-export function Update<T extends DbHelperModel>(model: T | {new(): T}): QueryUpdate<T> {
-    return new QueryUpdate(model);
 }

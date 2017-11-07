@@ -1,4 +1,4 @@
-import { QuerySelect } from './select.model';
+import { QuerySelect } from './query-select.model';
 import { QueryError } from '../../errors/query.error';
 import { DbHelperModel } from '../db-helper-model.model';
 import { QueryManager } from '../../managers/query-manager';

@@ -109,7 +109,7 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @since 0.2
      */
     public copy(): QuerySelect<T> {
-        const q = Select(this.model).where(this.whereClauses).join(this.joins).groupBy(this.grpBy).orderBy(this.ordrBy);
+        const q = (new QuerySelect(this.model)).where(this.whereClauses).join(this.joins).groupBy(this.grpBy).orderBy(this.ordrBy);
         if (this.proj) {q.projection(this.proj); }
         return q;
     }
@@ -375,34 +375,4 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
     public execRaw(): Observable<QueryResult<any>> {
         return QueryManager.getInstance().query(this.build());
     }
-}
-
-/**
- * @public
- *
- * @function Select
- *
- * @description
- * This function is an helper to select models inherited from {@link DbHelperModel}
- * from the database
- *
- * @param T @extends DbHelperModel a model declared with table and column annotations
- *
- * @example
- * ```typescript
- * // select todos
- * Select(Todo).where({isDone: false}}).exec().subscribe((qr: QueryResult<Todo>) => {
- *      // do something with the result...
- * }, (err) => {
- *      // do something with the error...
- * });
- * ```
- *
- * @return {QuerySelect<T>} the new query select instance.
- *
- * @author  Olivier Margarit
- * @since   0.1
- */
-export function Select<T extends DbHelperModel>(model: { new(): T }): QuerySelect<T> {
-    return new QuerySelect(model);
 }

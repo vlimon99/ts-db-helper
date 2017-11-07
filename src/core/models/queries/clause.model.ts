@@ -1,7 +1,7 @@
 import { IClause } from '../interfaces/i-clause.interface';
 import { ColumnClauseValue } from './column-clause-value.model';
 import { ClauseGroup } from './clause-group.model';
-import { QuerySelect } from './select.model';
+import { QuerySelect } from './query-select.model';
 import { ClauseComparators } from '../constants/clause-comparators.constant';
 import { ClauseOperators } from '../constants/clause-operators.constant';
 import { QueryError } from '../../errors/query.error';

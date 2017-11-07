@@ -8,7 +8,7 @@ import { Clause } from './clause.model';
 import { QueryPart } from './query-part.model';
 import { QueryError } from '../../errors/query.error';
 import { JoinType } from '../constants/join-type.constant';
-import { QuerySelect } from './select.model';
+import { QuerySelect } from './query-select.model';
 import { DbHelperModel } from '../db-helper-model.model';
 
 /**
