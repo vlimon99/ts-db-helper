@@ -1,6 +1,6 @@
 {
     "name": "ts-db-helper",
-    "version": "0.0.7",
+    "version": "0.0.11",
     "description": "Simple ORM based on TypeScript",
     "main": "dist/bundles/ts-db-helper.umd.js",
     "module": "dist/index.js",

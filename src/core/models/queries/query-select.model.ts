@@ -328,9 +328,11 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
         dbQuery.type = this.type;
         dbQuery.query += this.type;
         if (this.proj) {
-            dbQuery.query += ' ' + this.proj.join(', ');
-        } else {
+            dbQuery.query += ' `' + this.proj.join('`, `') + '`';
+        } else if (QueryManager.getInstance().supportRowid) {
             dbQuery.query += ' rowid, *';
+        } else {
+            dbQuery.query += ' *';
         }
         if (this.joins && this.joins.length && !this.proj) {
             dbQuery.query += ', ' + this.getJoinProjection();

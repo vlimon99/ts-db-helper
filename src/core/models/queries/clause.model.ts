@@ -199,7 +199,7 @@ export class Clause implements IClause {
         if (this.not) {
             queryPart.appendContent('NOT');
         }
-        queryPart.appendContent(this.key);
+        queryPart.appendContent('`' + this.key + '`');
         if ((this.value === null || this.value === undefined)  && this.comparator === ClauseComparators.EQ) {
             queryPart.appendContent('IS');
         } else if (

@@ -16,6 +16,9 @@ import { DbQuery } from '../models/db-query.model';
  * @since   0.1
  */
 export interface QueryConnector {
+
+    readonly supportRowid: boolean;
+
     /**
      * @method query connector method to fire query
      *

@@ -89,6 +89,12 @@ export class QueryManager {
      */
     private batchSubject: Subject<any> | undefined;
 
+    private supportRowidValue = false;
+
+    public get supportRowid(): boolean {
+        return this.supportRowidValue;
+    }
+
     /**
      * @static
      * @public
@@ -104,6 +110,7 @@ export class QueryManager {
         const instance = QueryManager.getInstance();
         instance.queryConnector = config.queryConnector;
         instance.modelMigration = config.modelMigration;
+        instance.supportRowidValue = config.queryConnector.supportRowid;
         ModelManager.version = config.version;
         if (config.autoIncrementVersion && ModelManager.version) {
             // compute auto upgrade version

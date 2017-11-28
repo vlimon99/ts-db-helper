@@ -40,7 +40,7 @@ export class QueryCreate {
     public build(): string {
         const columns = [];
         for (const column of this.table.columnList) {
-            let value = column.name + ' ' + (column.autoIncrement ? 'INTEGER' : column.type);
+            let value = '`' + column.name + '` ' + (column.autoIncrement ? 'INTEGER' : column.type);
             value += (column.primaryKey ? ' PRIMARY KEY' : '');
             value += (column.autoIncrement ? ' AUTOINCREMENT' : '');
             columns.push(value);

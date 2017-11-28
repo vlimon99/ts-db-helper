@@ -142,7 +142,7 @@ export class QueryUpdate<T extends DbHelperModel> {
                 }
             }
         }
-        queryPart.content = 'SET ' + columnsToUpdate.join(' = (?), ') + ' = (?)';
+        queryPart.content = 'SET `' + columnsToUpdate.join('` = (?), `') + '` = (?)';
         return queryPart;
     }
 

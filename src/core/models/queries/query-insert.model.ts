@@ -106,7 +106,7 @@ export class QueryInsert<T extends DbHelperModel> {
         for (const column of table.columnList) {
             columns.push(column.name);
         }
-        dbQuery.query += this.type + ' INTO ' + table.name + ' (' + columns.join(', ') + ') VALUES ';
+        dbQuery.query += this.type + ' INTO ' + table.name + ' (`' + columns.join('`, `') + '`) VALUES ';
 
         const items = Array.isArray(this.model) ? this.model : [this.model];
         const valuesStrings = [];

@@ -135,7 +135,7 @@ export class CompositeClause implements IClause {
         if (this.not) {
             queryPart.appendContent('NOT');
         }
-        queryPart.appendContent('(' + this.keysValue.join(', ') + ')');
+        queryPart.appendContent('(`' + this.keysValue.join('`, `') + '`)');
         queryPart.appendContent(this.comparator);
         queryPart.appendContent('(');
         let isFirst = true;
