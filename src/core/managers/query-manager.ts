@@ -1,3 +1,5 @@
+import { DefaultLogger } from '../internal/default-logger';
+import { IDbLogger } from '../interfaces/db-logger';
 import { DbHelperModuleConfig } from '../db-helper-module-config';
 import { toArray } from 'rxjs/operator/toArray';
 import { Subject } from 'rxjs/Subject';
@@ -34,6 +36,8 @@ export class QueryManager {
      * @property {QueryManager} instance private reference to the model manager instance
      */
     private static instance = new QueryManager();
+
+    private loggerValue: IDbLogger;
 
     /**
      * @private
@@ -91,6 +95,13 @@ export class QueryManager {
 
     private supportRowidValue = false;
 
+    public get logger(): IDbLogger {
+        if (!this.loggerValue) {
+            this.loggerValue = new DefaultLogger();
+        }
+        return this.loggerValue;
+    }
+
     public get supportRowid(): boolean {
         return this.supportRowidValue;
     }
@@ -111,6 +122,9 @@ export class QueryManager {
         instance.queryConnector = config.queryConnector;
         instance.modelMigration = config.modelMigration;
         instance.supportRowidValue = config.queryConnector.supportRowid;
+        if (config.logger) {
+            instance.loggerValue = config.logger;
+        }
         ModelManager.version = config.version;
         if (config.autoIncrementVersion && ModelManager.version) {
             // compute auto upgrade version
@@ -152,18 +166,18 @@ export class QueryManager {
         if (this.queryConnector && this.modelMigration) {
             const modelMigration = this.modelMigration;
             this.queryConnector.getDbVersion().subscribe((version: string) => {
-                console.log('old version: ' + version);
+                this.logger.info('old version: ' + version);
                 const dataModel = ModelManager.getInstance().getDataModel();
                 dataModel.version = ModelManager.version;
-                console.log('new version: ' + dataModel.version);
+                this.logger.info('new version: ' + dataModel.version);
                 let isFailed: any = false;
                 if (!version) {
-                    console.log('call init data model migration');
+                    this.logger.info('call init data model migration');
                     modelMigration.initModel(dataModel).subscribe(() => {
-                        console.log('init data model migration successed');
+                        this.logger.info('init data model migration successed');
                     }, (err: any) => {
                         isFailed = err;
-                        console.log('init data model migration failed');
+                        this.logger.warn('init data model migration failed');
                     }, () => {
                         if (isFailed) {
                             this.onInitializationFailure(isFailed);
@@ -172,12 +186,12 @@ export class QueryManager {
                         }
                     });
                 } else if (version !== ModelManager.version) {
-                    console.log('call upgrade data model migration');
+                    this.logger.info('call upgrade data model migration');
                     modelMigration.upgradeModel(dataModel, version).subscribe(() => {
-                        console.log('upgrade data model migration successed');
+                        this.logger.info('upgrade data model migration successed');
                     }, (err: any) => {
                         isFailed = err;
-                       console.log('upgrade data model migration failed');
+                       this.logger.warn('upgrade data model migration failed');
                     }, () => {
                         if (isFailed) {
                             this.onInitializationFailure(isFailed);
@@ -203,7 +217,7 @@ export class QueryManager {
      * @param {Error} err the error return by the initialization failure
      */
     private onInitializationFailure(err: any) {
-        console.error(err);
+        this.logger.error(err);
         this.isInitializationFailed = true;
         this.dequeuePendingRequest();
     }

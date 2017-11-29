@@ -1,3 +1,4 @@
+import { IDbLogger } from './interfaces/db-logger';
 import { QueryConnector } from './interfaces/query-connector.interface';
 import { ModelMigration } from './interfaces/model-migration.interface';
 
@@ -42,4 +43,6 @@ export class DbHelperModuleConfig {
      * {@link WebsqlConnector} for usage.
      */
     public modelMigration: ModelMigration;
+
+    public logger?: IDbLogger;
 }
