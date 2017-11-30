@@ -19,39 +19,39 @@ export class DefaultLogger implements IDbLogger {
         }
     }
 
-    public trace(message: string, ...args: any[]): void {
+    public trace(...args: any[]): void {
         if (this.isLogLevelActivated('trace')) {
-            console.trace(message, ...args);
+            console.trace(...args);
         }
     }
 
-    public debug(message: string, ...args: any[]): void {
+    public debug(...args: any[]): void {
         if (this.isLogLevelActivated('debug')) {
-            console.log(message, ...args);
+            console.log(...args);
         }
     }
 
-    public info(message: string, ...args: any[]): void {
+    public info(...args: any[]): void {
         if (this.isLogLevelActivated('info')) {
-            console.info(message, ...args);
+            console.info(...args);
         }
     }
 
-    public warn(message: string, ...args: any[]): void {
+    public warn(...args: any[]): void {
         if (this.isLogLevelActivated('warn')) {
-            console.warn(message, ...args);
+            console.warn(...args);
         }
     }
 
-    public error(message: string, ...args: any[]): void {
+    public error(...args: any[]): void {
         if (this.isLogLevelActivated('error')) {
-            console.error(message, ...args);
+            console.error(...args);
         }
     }
 
-    public fatal(message: string, ...args: any[]): void {
+    public fatal(...args: any[]): void {
         if (this.isLogLevelActivated('fatal')) {
-            console.error(message, ...args);
+            console.error(...args);
         }
     }
 }

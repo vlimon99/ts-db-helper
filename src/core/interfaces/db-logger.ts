@@ -1,10 +1,10 @@
 export interface IDbLogger {
     level: string;
     log(...args: any[]): void;
-    trace(message: string, ...args: any[]): void;
-    debug(message: string, ...args: any[]): void;
-    info(message: string, ...args: any[]): void;
-    warn(message: string, ...args: any[]): void;
-    error(message: string, ...args: any[]): void;
-    fatal(message: string, ...args: any[]): void;
+    trace(...args: any[]): void;
+    debug(...args: any[]): void;
+    info(...args: any[]): void;
+    warn(...args: any[]): void;
+    error(...args: any[]): void;
+    fatal(...args: any[]): void;
 }
