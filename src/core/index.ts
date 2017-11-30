@@ -54,3 +54,4 @@ export { BadColumnDeclarationError } from './errors/bad-column-declaration.error
 export { Table } from './decorators/table';
 export { Column } from './decorators/column';
 export { QueryResult } from './interfaces/query-result.interface';
+export { IDbLogger} from './interfaces/db-logger';
