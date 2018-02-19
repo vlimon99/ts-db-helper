@@ -328,7 +328,18 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
         dbQuery.type = this.type;
         dbQuery.query += this.type;
         if (this.proj) {
-            dbQuery.query += ' `' + this.proj.join('`, `') + '`';
+            dbQuery.query += ' ';
+            for (let i = 0; i < this.proj.length; i++) {
+                const item = this.proj[i];
+                if (item.trim().indexOf('(') >= 0) {
+                    dbQuery.query += item;
+                } else {
+                    dbQuery.query += ' `' + item + '`';
+                }
+                if (i < this.proj.length - 1) {
+                    dbQuery.query += ', ';
+                }
+            }
         } else if (QueryManager.getInstance().supportRowid) {
             dbQuery.query += ' rowid, *';
         } else {
@@ -342,8 +353,11 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
             dbQuery.append(joinQuery.build());
         }
         if (this.whereClauses) {
-            dbQuery.query += ' WHERE';
-            dbQuery.append(this.whereClauses.build());
+            const w = this.whereClauses.build();
+            if (w && w.content) {
+                dbQuery.query += ' WHERE';
+                dbQuery.append(w);
+            }
         }
         if (this.grpBy) {
             dbQuery.query += ' GROUP BY ' + this.grpBy;

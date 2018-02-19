@@ -9,9 +9,10 @@ export class AutoSerializer<T extends DbHelperModel> extends Serializer<T> {
 
     public constructor(model: {new(): T}, target?: Object | DbHelperModel | boolean, many?: boolean) {
         super(target, many);
+        this.model = model;
         const columns = ModelManager.getInstance().getModel(model).columnList;
         for (const column of columns) {
-            this.fields.push(column.name);
+            this.fields.push(column.field);
         }
     }
 }

@@ -22,14 +22,14 @@ export abstract class Serializer<T extends DbHelperModel> {
     protected abstract fields: Array<string | FieldSerializer>;
 
     public constructor(target?: T | Object | boolean, public many?: boolean) {
-        if (target instanceof this.model) {
+        if (this.model && target instanceof this.model) {
             this.instance = target;
-        } else if (Array.isArray(target) && target[0] instanceof this.model) {
+        } else if (this.model && Array.isArray(target) && target[0] instanceof this.model) {
             this.many = true;
             this.instances = target;
         } else if (target) {
             this.data = target;
-        } else if (target !== undefined && (target === true || target === false)) {
+        } else if (target !== undefined && ((target as boolean) === true || target === false)) {
             this.many = target as boolean;
         }
     }
