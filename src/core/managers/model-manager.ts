@@ -126,9 +126,9 @@ export class ModelManager {
      *
      * @return {DbTable} the table declared for the model
      */
-    public getModel(model: string | DbHelperModel | {new(): DbHelperModel }): DbTable {
+    public getModel(model: String  | {new(): DbHelperModel } | DbHelperModel): DbTable {
         if (model instanceof String) {
-            return this.tables[model];
+            return this.tables[model as string];
         } else if (model instanceof DbHelperModel) {
             return this.tables[this.getTable(model.constructor as {new(): DbHelperModel})];
         } else {
